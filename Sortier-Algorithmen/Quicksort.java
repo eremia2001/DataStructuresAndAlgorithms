@@ -50,39 +50,45 @@ class Quicksort
     // Rückgabewert : der Index q des Pivotelements ( nach der Partitionierung )
     public static void quicksort(int[] array ,int low, int high)
     {
-        int lowPointer = low;
-        int highPointer = high;
+    
         // Wenn das Array aus einem Element besteht..ist es schon sortiert
-        if(lowPointer >= highPointer) 
+        if(low >= high) 
         {
             return ;
         }
         // Auswahl des Pivotelements
-        int pivot = array[high];
+        int pivot = array[high]; 
+        int lowPointer = partitioning(array, low, high, pivot);
 
-        // Sortieren der Zahlen
-        while(lowPointer < highPointer)
-        {
-            // sucht eine Zahl die größer ist als Pivot
-            while(array[lowPointer] <= pivot && lowPointer < highPointer)
-            {
-                lowPointer++;
-            }
-            // Sucht eine Zahl die kleiner ist als Pivot
-            while(array[highPointer] >= pivot && lowPointer < highPointer)
-            {
-                highPointer--;
-            }
-
-            swap(array, lowPointer, highPointer);
-        }
-        
-        swap(array, lowPointer, high);
-        
         quicksort(array, low, lowPointer-1); // linkes Teilfeld
         quicksort(array, lowPointer+1, high); // rechtes Teilfeld
+
+    }
+    
+    public static int partitioning(int[] array , int low, int high, int pivot)
+    {
+        int lowPointer = low;
+        int highPointer = high;
+           // Sortieren der Zahlen
+           while(lowPointer < highPointer)
+           {
+               // sucht eine Zahl die größer ist als Pivot
+               while(array[lowPointer] <= pivot && lowPointer < highPointer)
+               {
+                   lowPointer++;
+               }
+               // Sucht eine Zahl die kleiner ist als Pivot
+               while(array[highPointer] >= pivot && lowPointer < highPointer)
+               {
+                   highPointer--;
+               }
+   
+               swap(array, lowPointer, highPointer);
+           }
+           
+           swap(array, lowPointer, high);
+           return lowPointer;
         
-      
     }
 
     private static void swap(int[] array, int index1, int index2)
