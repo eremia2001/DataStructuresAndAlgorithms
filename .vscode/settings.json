@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
         "Datenstrukturen/Zirkluläre Listen",
-        "Datenstrukturen/SingleList"
+        "Datenstrukturen/SingleList",
+        ""
     ]
 }
