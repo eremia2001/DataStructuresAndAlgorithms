@@ -1,16 +1,30 @@
 import java.util.ArrayList;
 
 public class Graph {
-    int nodeQuant;
-    public ArrayList<Edge> allEdges;
+    public int nodeQuant; // Anzahl
+    public ArrayList<Edge> allEdges; // alle Kanten
+    public ArrayList<Node> allNodes; // alle Knoten
 
-    public Graph() {
-        this.nodeQuant = 0;
-        this.allEdges = new ArrayList<>();
-    }
-
-    public Graph(int nodeQuant, Edge edge) {
+    public Graph(int nodeQuant) {
         this.nodeQuant = nodeQuant;
-        this.allEdges.add(edge);
+        this.allEdges = new ArrayList<>();
+        this.allNodes = new ArrayList<>();
     }
+
+    public void initNodes(Graph graph) {
+        for (int i = 0; i < graph.nodeQuant; i++) {
+            graph.allNodes.add(new Node(i, i)); // es gibt genauso viele Mengen wie Knoten am anfang
+        }
+    }
+
+    public Node findNode(int name) {
+        for (int i = 0; i < allNodes.size(); i++) {
+            if (name == allNodes.get(i).name) {
+                return allNodes.get(i);
+            }
+        }
+
+        return (new Node(name));
+    }
+
 }

@@ -1,9 +1,9 @@
 public class Edge implements Comparable<Edge> {
-    public int startNode;
-    public int endNode;
+    public Node startNode;
+    public Node endNode;
     public int cost;
 
-    public Edge(int startNode, int endNode, int cost) {
+    public Edge(Node startNode, Node endNode, int cost) {
         this.startNode = startNode;
         this.endNode = endNode;
         this.cost = cost;
@@ -12,7 +12,7 @@ public class Edge implements Comparable<Edge> {
     @Override
     public String toString() {
 
-        return "(Start : " + startNode + " End : " + endNode + " Cost : " + cost + " )";
+        return "(" + startNode + " ," + endNode + " ," + cost + " )";
     }
 
     @Override
