@@ -1,16 +1,17 @@
 import java.util.ArrayList;
 
-public class Set {
+public class Set { // Menge
     public int parent;
-    ArrayList<Node> nodeList;
+    public ArrayList<Node> nodeList; // Knotenmenge
 
     public Set(Node node) {
         nodeList = new ArrayList<>();
         nodeList.add(node);
+        parent = node.name;
     }
 
     @Override
     public String toString() {
-        return "Set : " + this.parent;
+        return "{ " + this.nodeList + " }";
     }
 }

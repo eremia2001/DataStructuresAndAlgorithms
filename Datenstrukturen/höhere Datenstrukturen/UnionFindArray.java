@@ -1,60 +1,65 @@
 import java.util.ArrayList;
-import java.util.*;
 
 public class UnionFindArray {
-    public ArrayList<Set> setList;
     public Graph graph;
+    public ArrayList<Set> allSets;
 
     public UnionFindArray(Graph graph) {
+        allSets = new ArrayList<>();
         this.graph = graph;
-        setList = new ArrayList<>();
         makeSet();
     }
 
     public void makeSet() {
 
         for (int i = 0; i < graph.nodeQuant; i++) {
-            setList.add(new Set(graph.allNodes.get(i)));
+            allSets.add(new Set(graph.allNodes.get(i)));
         }
-
     }
 
     public int find(Node node) {
-        for (int i = 0; i < setList.size(); i++) {
-            if (setList.get(i).nodeList.contains(node)) {
-                // System.out.println("Node :" + node.set);
+        for (int i = 0; i < allSets.size(); i++) {
+            if (allSets.get(i).parent == node.set) {
                 return i;
             }
-
         }
 
-        return -100;
-
+        return -111;
     }
 
+    // (3,2), (4,1) -> (3,1),(4,1)
     public boolean union(Edge edge) {
-        // alte Menge wird nicht gelöscht bei Union
-        // System.out.println("THIS EDGE :" + edge);
-        // System.out.println("Edge: " + edge);
-        // System.out.println("FIND 1: " + find(edge.startNode));
-        // System.out.println("FIND 2: " + find(edge.endNode));
 
-        Edge oldEdge = edge;
-        int indexStart = find(edge.startNode);
-        int indexEnd = find(edge.endNode);
-        if (find(edge.startNode) != find(edge.endNode)) {
-            for (int i = 0; i < setList.get(indexEnd).nodeList.size(); i++) {
-                setList.get(indexStart).nodeList.add(setList.get(indexEnd).nodeList.get(i));
+        Node oldStartEdge = new Node(edge.startNode.name, edge.startNode.set);
+        Node oldEndEdge = new Node(edge.endNode.name, edge.endNode.set);
+        if (edge.startNode.set != edge.endNode.set) {
+            ArrayList<Node> rootSet = allSets.get(find(edge.startNode)).nodeList;
+            // moveSet ist die Menge die in eine andere verschoben wird
+            ArrayList<Node> moveSet = allSets.get(find(edge.endNode)).nodeList;
+
+            // Union by size
+            if (rootSet.size() < moveSet.size()) {
+                for (int i = 0; i < moveSet.size(); i++) {
+                    moveSet.get(i).set = edge.startNode.set;
+
+                }
+                // konkatiere beide Mengen
+                rootSet.addAll(moveSet);
+                // löscht alte Menge
+                allSets.remove(find(oldEndEdge));
+            } else {
+                for (int i = 0; i < rootSet.size(); i++) {
+                    rootSet.get(i).set = edge.endNode.set;
+
+                }
+                moveSet.addAll(rootSet);
+                allSets.remove(find(oldStartEdge));
             }
-            deleteOldSet(oldEdge);
+
             return true;
         }
 
         return false;
-    }
-
-    public void deleteOldSet(Edge edge) {
-        setList.remove(find(edge.endNode));
     }
 
 }

@@ -33,17 +33,16 @@ class Kruskal {
                         trimmedData = data.substring(5); // unnötige Informationen werden gelöscht
                         ; // Bsp.: p edge N E
                         itemStringData = trimmedData.split(" "); // String wird beim " " in Array gesplittet
-                        nodeQuant = Integer.parseInt(itemStringData[1]);
+                        nodeQuant = Integer.parseInt(itemStringData[0]);
                         graph = new Graph(nodeQuant);
                         graph.initNodes(graph);
-                        edgesQuant = Integer.parseInt(itemStringData[0]);
+                        edgesQuant = Integer.parseInt(itemStringData[1]);
                         graph.nodeQuant = nodeQuant;
                         break;
 
                     case 'a': // Das ist eine Kante
                         trimmedData = data.substring(2);
                         itemStringData = trimmedData.split(" ");
-                        // System.out.println(itemStringData[0] + " " + itemStringData[1]);
                         startNode = graph.findNode(Integer.parseInt(itemStringData[0]));
                         endNode = graph.findNode(Integer.parseInt(itemStringData[1]));
                         edgeCost = Integer.parseInt(itemStringData[2]);
@@ -52,7 +51,6 @@ class Kruskal {
                 }
 
             }
-            System.out.println("NODEQUANT : " + nodeQuant);
 
             // Error Handling, falls keine Datei gefunden worden ist.
         } catch (FileNotFoundException e) {
@@ -67,8 +65,6 @@ class Kruskal {
         Mst = new ArrayList<>();
         // Kante einfügen. wenn kein Kreis entsteht
         UnionFindArray uFindArray = new UnionFindArray(graph);
-
-        // System.out.println(graph.allEdges.get(0));
         for (Edge edge : graph.allEdges) {
             if (uFindArray.union(edge)) {
                 Mst.add(edge);
@@ -79,9 +75,6 @@ class Kruskal {
             System.out.println(edge);
         }
 
-        // System.out.println("Sets : " + uFindArray.setList);
-        // System.out.println(graph.allEdges);
-        // System.out.println(graph.allNodes);
     }
 
 }

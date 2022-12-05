@@ -12,7 +12,7 @@ public class Graph {
     }
 
     public void initNodes(Graph graph) {
-        for (int i = 0; i < graph.nodeQuant; i++) {
+        for (int i = 1; i < graph.nodeQuant + 1; i++) {
             graph.allNodes.add(new Node(i, i)); // es gibt genauso viele Mengen wie Knoten am anfang
         }
     }
