@@ -1,3 +1,4 @@
+
 public class Edge implements Comparable<Edge> {
     public Node startNode;
     public Node endNode;

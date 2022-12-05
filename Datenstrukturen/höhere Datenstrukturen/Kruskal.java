@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ class Kruskal {
         // Schritt 2 : Initialisiere MST mit leere Menge
         Mst = new ArrayList<>();
         // Kante einfügen. wenn kein Kreis entsteht
-        UnionFindArray uFindArray = new UnionFindArray(graph);
+        // UnionFindArray uFindArray = new UnionFindArray(graph);
         UnionFindForest uFindForest = new UnionFindForest(graph);
         for (Edge edge : graph.allEdges) {
             if (uFindForest.union(edge)) {
@@ -73,7 +74,7 @@ class Kruskal {
         }
 
         for (Edge edge : Mst) {
-            System.out.println(edge);
+            // System.out.println(edge);
         }
 
     }
