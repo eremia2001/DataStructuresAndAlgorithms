@@ -65,8 +65,9 @@ class Kruskal {
         Mst = new ArrayList<>();
         // Kante einfügen. wenn kein Kreis entsteht
         UnionFindArray uFindArray = new UnionFindArray(graph);
+        UnionFindForest uFindForest = new UnionFindForest(graph);
         for (Edge edge : graph.allEdges) {
-            if (uFindArray.union(edge)) {
+            if (uFindForest.union(edge)) {
                 Mst.add(edge);
             }
         }
